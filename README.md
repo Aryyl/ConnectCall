@@ -91,8 +91,4 @@ flutter run
 
 ## 🤖 AI Tools Used
 
-This application was developed, debugged, and architected with the assistance of **Google Antigravity IDE** (Gemini-based AI). AI was heavily utilized for:
-- Implementing the ZEGOCLOUD integration and Call History logic.
-- Debugging complex Android native permission flows (`SYSTEM_ALERT_WINDOW` and `USE_FULL_SCREEN_INTENT`).
-- Resolving `go_router` and Zego modal navigation race conditions.
-- Building the UI components and Riverpod state management.
+- Antigravity
