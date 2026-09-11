@@ -2,6 +2,11 @@
 
 ConnectCall is a modern, real-time audio and video calling Flutter application. It features a sleek Material 3 user interface, persistent background calling capabilities, and robust user management. The app is designed to deliver a seamless communication experience with offline push notifications, allowing devices to ring even when the app is asleep or killed.
 
+### 🔗 Important Links
+- **GitHub Repository:** [https://github.com/Aryyl/ConnectCall](https://github.com/Aryyl/ConnectCall)
+- **Download APK:** [v1.0.0 Release](https://github.com/Aryyl/ConnectCall/releases/tag/v1.0.0)
+- **Video Demo & APK (Drive):** [Google Drive Link](https://drive.google.com/drive/folders/1oIytxh9vEb20_-0sKnxacdoVvrGlHST7?usp=drive_link)
+
 ---
 
 ## 🌟 Features

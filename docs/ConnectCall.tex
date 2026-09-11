@@ -1,0 +1,157 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{geometry}
+
+% Professional margin configuration
+\geometry{
+    a4paper,
+    left=1in,
+    right=1in,
+    top=1in,
+    bottom=1in
+}
+
+% Color definitions
+\definecolor{primary}{RGB}{33, 33, 33}
+\definecolor{accent}{RGB}{0, 112, 201}
+\definecolor{linkcolor}{RGB}{0, 86, 179}
+
+% Hyperlink configuration
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    filecolor=linkcolor,      
+    urlcolor=linkcolor,
+    pdftitle={ConnectCall Documentation},
+}
+
+% Section styling
+\titleformat{\section}
+  {\Large\bfseries\color{primary}}
+  {\thesection}{1em}{}[\vspace{-0.5em}\rule{\textwidth}{0.4pt}]
+\titleformat{\subsection}
+  {\large\bfseries\color{primary}}
+  {\thesubsection}{1em}{}
+
+% Custom spacing for lists
+\setlist[itemize]{itemsep=0.2em, topsep=0.5em}
+\setlist[enumerate]{itemsep=0.2em, topsep=0.5em}
+
+\begin{document}
+
+% Custom Title Block without excess whitespace
+\begin{center}
+    \vspace*{-1em}
+    {\Huge \textbf{\textsf{ConnectCall}}} \\[1em]
+    {\large \textit{Project Documentation \& Setup Guide}} \\[1.5em]
+    
+    % Important Links
+    \textbf{GitHub Repository:} \url{https://github.com/Aryyl/ConnectCall} \\
+    \textbf{Download APK:} \url{https://github.com/Aryyl/ConnectCall/releases/tag/v1.0.0} \\
+    \textbf{Video Demo \& APK (Drive):} \url{https://drive.google.com/drive/folders/1oIytxh9vEb20_-0sKnxacdoVvrGlHST7?usp=drive_link} \\[1.5em]
+\end{center}
+
+\noindent
+ConnectCall is a modern, real-time audio and video calling Flutter application. It features a sleek Material 3 user interface, persistent background calling capabilities, and robust user management. The app is designed to deliver a seamless communication experience with offline push notifications, allowing devices to ring even when the app is asleep or killed.
+\vspace{1em}
+
+\section*{Features}
+\begin{itemize}
+    \item \textbf{Real-Time Communication:} 1-on-1 and Group Audio/Video calling.
+    \item \textbf{Offline Push Notifications:} Calls ring on the receiver's device even if the app is killed, using ZPNs (ZEGOCLOUD Push Notification service).
+    \item \textbf{Screen Sharing:} \textit{(Currently experiencing issues)} Built-in screen sharing capabilities utilizing the gallery layout.
+    \item \textbf{User Authentication:} Secure user authentication managed via Firebase Auth.
+    \item \textbf{User Management \& Blocking:} A robust user directory allowing you to block/unblock users to prevent unwanted calls.
+    \item \textbf{Call History:} Automatic logging of incoming, outgoing, missed, and rejected calls synced in real-time.
+    \item \textbf{Automated Permissions:} Clean, sequential permission request flow (Camera, Mic, Notifications, Display Over Other Apps) on first launch to ensure smooth call connections.
+\end{itemize}
+
+\section*{Tech Stack \& Architecture}
+\begin{itemize}
+    \item \textbf{Flutter Version:} Flutter 3.24+
+    \item \textbf{Architecture:} Feature-first modular architecture utilizing Controller/Service patterns.
+    \item \textbf{State Management:} \texttt{flutter\_riverpod} (v2) for reactive, compile-safe state management.
+    \item \textbf{Routing:} \texttt{go\_router} featuring a persistent bottom navigation shell (\texttt{StatefulShellRoute}).
+    \item \textbf{Backend:} Firebase 
+    \begin{itemize}
+        \item \textit{Firebase Auth} for identity.
+        \item \textit{Cloud Firestore} for user directories, blocking logic, and call history.
+    \end{itemize}
+    \item \textbf{Calling SDK:} ZEGOCLOUD
+    \begin{itemize}
+        \item \texttt{zego\_uikit\_prebuilt\_call} for the core calling UI and WebRTC engine.
+        \item \texttt{zego\_uikit\_signaling\_plugin} \& \texttt{zego\_zpns} for offline call invitations and push notifications.
+    \end{itemize}
+\end{itemize}
+
+\section*{Key Packages Used}
+\begin{itemize}
+    \item \texttt{firebase\_core}, \texttt{firebase\_auth}, \texttt{cloud\_firestore}
+    \item \texttt{flutter\_riverpod}, \texttt{riverpod\_annotation}
+    \item \texttt{go\_router}
+    \item \texttt{zego\_uikit\_prebuilt\_call}, \texttt{zego\_uikit\_signaling\_plugin}, \texttt{zego\_zpns}
+    \item \texttt{permission\_handler}
+    \item \texttt{flutter\_dotenv}
+    \item \texttt{uuid}
+\end{itemize}
+
+\section*{Setup Instructions}
+
+\subsection*{Prerequisites}
+\begin{enumerate}
+    \item \textbf{Flutter SDK} installed and configured on your machine.
+    \item A \textbf{Firebase Project} with Authentication (Email/Password) and Firestore enabled.
+    \item A \textbf{ZEGOCLOUD account} with a registered project to obtain your App ID and App Sign.
+\end{enumerate}
+
+\subsection*{1. Clone \& Install Dependencies}
+\begin{verbatim}
+git clone <repository_url>
+cd connect_call
+flutter pub get
+\end{verbatim}
+
+\subsection*{2. Firebase Configuration}
+\begin{itemize}
+    \item Download your \texttt{google-services.json} from the Firebase Console.
+    \item Place it inside the \texttt{android/app/} directory.
+    \item \textit{(For iOS, place the \texttt{GoogleService-Info.plist} inside the \texttt{ios/Runner/} directory).}
+\end{itemize}
+
+\subsection*{3. Environment Variables (.env)}
+The app uses \texttt{flutter\_dotenv} to securely manage ZEGOCLOUD credentials. Create a \texttt{.env} file in the root directory (\texttt{connect\_call/.env}) and add your ZEGOCLOUD credentials:
+
+\begin{verbatim}
+ZEGO_APP_ID=1234567890
+ZEGO_APP_SIGN=your_64_character_hex_string_here
+\end{verbatim}
+
+\textit{Ensure that \texttt{.env} is declared in your \texttt{pubspec.yaml} under the \texttt{assets:} section.}
+
+\subsection*{4. Run the App}
+To test audio/video capabilities and offline push notifications, it is highly recommended to run the app on \textbf{physical devices} rather than emulators.
+
+\begin{verbatim}
+flutter run
+\end{verbatim}
+
+\section*{Known Limitations}
+\begin{enumerate}
+    \item \textbf{Simulator/Emulator Constraints:} Audio, Video, and Push Notifications behave unreliably on emulators. Always test on physical devices.
+    \item \textbf{iOS Background Calling:} Offline push notifications on iOS require additional configuration (APNs certificates) in the ZEGOCLOUD console and Apple Developer Portal.
+    \item \textbf{Android 14+ Permissions:} The app requests \texttt{USE\_FULL\_SCREEN\_INTENT} and \texttt{SYSTEM\_ALERT\_WINDOW} explicitly. Depending on the Android manufacturer (e.g., Xiaomi, Vivo), the user may still need to manually allow "Display pop-up windows while running in the background" in the OS settings.
+    \item \textbf{Network Sensitivity \& Stability:} The underlying calling technology is highly sensitive to network fluctuations. Poor or unstable internet connections can cause calling screen glitches, delayed connections, or dropped calls.
+\end{enumerate}
+
+\section*{AI Tools Used}
+\begin{itemize}
+    \item Antigravity
+\end{itemize}
+
+\end{document}
