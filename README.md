@@ -8,7 +8,7 @@ ConnectCall is a modern, real-time audio and video calling Flutter application. 
 
 - **Real-Time Communication:** 1-on-1 and Group Audio/Video calling.
 - **Offline Push Notifications:** Calls ring on the receiver's device even if the app is killed, using ZPNs (ZEGOCLOUD Push Notification service).
-- **Screen Sharing:** Built-in screen sharing capabilities properly utilizing the gallery layout for clear visibility.
+- **Screen Sharing:** *(Currently experiencing issues)* Built-in screen sharing capabilities utilizing the gallery layout.
 - **User Authentication:** Secure user authentication managed via Firebase Auth.
 - **User Management & Blocking:** A robust user directory allowing you to block/unblock users to prevent unwanted calls.
 - **Call History:** Automatic logging of incoming, outgoing, missed, and rejected calls synced in real-time.
