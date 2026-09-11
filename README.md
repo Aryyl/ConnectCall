@@ -86,6 +86,7 @@ flutter run
 1. **Simulator/Emulator Constraints:** Audio, Video, and Push Notifications behave unreliably on emulators. Always test on physical devices.
 2. **iOS Background Calling:** Offline push notifications on iOS require additional configuration (APNs certificates) in the ZEGOCLOUD console and Apple Developer Portal.
 3. **Android 14+ Permissions:** The app requests `USE_FULL_SCREEN_INTENT` and `SYSTEM_ALERT_WINDOW` explicitly. Depending on the Android manufacturer (e.g., Xiaomi, Vivo), the user may still need to manually allow "Display pop-up windows while running in the background" in the OS settings.
+4. **Network Sensitivity & Stability:** The underlying calling technology is highly sensitive to network fluctuations. Poor or unstable internet connections can cause calling screen glitches, delayed connections, or dropped calls.
 
 ---
 
